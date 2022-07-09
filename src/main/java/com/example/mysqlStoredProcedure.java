@@ -66,18 +66,18 @@ class log1 {
 }
 
 public class mysqlStoredProcedure {
-    static Scanner sc = new Scanner(System.in);
-    public static int inp = sc.nextInt();
-    public static int s = inp + 2;
-    public static int e = inp;
-    public static int i;
-    public static int a = 117462 / s;
-    public static Thread t;
 
     public static void main(String args[]) throws Exception {
         long startTime = System.nanoTime();
+        Scanner sc = new Scanner(System.in);
+        int inp = sc.nextInt();
+        int s = inp + 2;
+        int e = inp;
+        int i;
+        int a = 117462 / s;
+        Thread t;
         for (i = 0; i < inp; i++) {
-            System.out.println("Thread" + i + 1);
+            System.out.println("Thread" + i);
             t = new Thread(new Runnable() {
                 log1 op = new log1();
 
@@ -99,6 +99,7 @@ public class mysqlStoredProcedure {
             });
             t.start();
         }
+        t.join();
         long endTime = System.nanoTime();
         long totalTime = endTime - startTime;
         double totalTimeInSeconds = (double) totalTime / 1000000000;

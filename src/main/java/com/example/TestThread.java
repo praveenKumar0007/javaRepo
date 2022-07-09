@@ -64,11 +64,16 @@ class MyThread extends Thread {
 
   }
 
+  int no_of_items = 0;
+  int var, s, e, a;
+
   public void run() {
-    int var = TestThread.n;
-    int s = var + 2;
-    int e = var;
-    int a = 117462 / s;
+    if (no_of_items == 0) {
+      var = TestThread.n;
+      s = var + 2;
+      e = var;
+      a = 117462 / s;
+    }
     try {
       thr(117462 / s - a, 117462 / e);
     } catch (Exception e1) {
@@ -77,6 +82,7 @@ class MyThread extends Thread {
     a = 0;
     s -= 1;
     e -= 1;
+    no_of_items++;
   }
 }
 
