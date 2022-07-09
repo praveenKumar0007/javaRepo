@@ -72,7 +72,6 @@ class MyThread extends Thread {
     try {
       thr(117462 / s - a, 117462 / e);
     } catch (Exception e1) {
-      // TODO Auto-generated catch block
       e1.printStackTrace();
     }
     a = 0;
