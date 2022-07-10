@@ -9,6 +9,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.junit.AfterClass;
 
 class log1 {
     public void thr1(int strt, int end) throws Exception {
@@ -66,17 +67,18 @@ class log1 {
 }
 
 public class mysqlStoredProcedure {
+    static int inp, s, e, a;
+    static Thread t;
 
     public static void main(String args[]) throws Exception {
         long startTime = System.nanoTime();
         Scanner sc = new Scanner(System.in);
-        int inp = sc.nextInt();
-        int s = inp + 2;
-        int e = inp;
-        int i;
-        int a = 117462 / s;
-        Thread t;
-        for (i = 0; i < inp; i++) {
+        inp = sc.nextInt();
+        s = inp + 2;
+        e = inp;
+        a = 117462 / s;
+
+        for (int i = 0; i < inp; i++) {
             System.out.println("Thread" + i);
             t = new Thread(new Runnable() {
                 log1 op = new log1();
@@ -105,4 +107,5 @@ public class mysqlStoredProcedure {
         double totalTimeInSeconds = (double) totalTime / 1000000000;
         System.out.println("Total time : " + totalTimeInSeconds);
     }
+
 }

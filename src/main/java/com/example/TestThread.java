@@ -59,30 +59,25 @@ class MyThread extends Thread {
       e.printStackTrace();
     } catch (ParseException e) {
       e.printStackTrace();
+      myConn.close();
     }
-    myConn.close();
-
   }
 
-  int no_of_items = 0;
-  int var, s, e, a;
+  int fi;
+  int se;
+
+  MyThread(int fi, int se) {
+    this.fi = fi;
+    this.se = se;
+  }
 
   public void run() {
-    if (no_of_items == 0) {
-      var = TestThread.n;
-      s = var + 2;
-      e = var;
-      a = 117462 / s;
-    }
     try {
-      thr(117462 / s - a, 117462 / e);
-    } catch (Exception e1) {
-      e1.printStackTrace();
+      thr(fi, se);
+    } catch (Exception e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
     }
-    a = 0;
-    s -= 1;
-    e -= 1;
-    no_of_items++;
   }
 }
 
@@ -94,16 +89,23 @@ class TestThread {
   public static void main(String arg[]) {
     long startTime = System.nanoTime();
 
-    System.out.println("Please input the number of Threads you want to create: ");
     System.out.println("You selected " + n + " Threads");
 
+    int fi = 0;
+    int se = 117462 / n;
+    int op = 117462 / n;
     for (int x = 0; x < n; x++) {
-      temp = new MyThread();
+      temp = new MyThread(fi, se);
       temp.start();
+      fi += op;
+      se += op;
       System.out.println("Started Thread:" + x);
     }
     try {
       temp.join();
+      System.out.println("---------------------------");
+      System.out.println("ALL THREADS ARE TERMINATED");
+      System.out.println("---------------------------");
     } catch (InterruptedException e) {
       // TODO Auto-generated catch block
       e.printStackTrace();
@@ -112,6 +114,6 @@ class TestThread {
     long endTime = System.nanoTime();
     long totalTime = endTime - startTime;
     double totalTimeInSeconds = (double) totalTime / 1000000000;
-    System.out.println("Total time : " + totalTimeInSeconds);
+    System.out.println("TIME TAKEN : " + totalTimeInSeconds);
   }
 }
